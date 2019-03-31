@@ -104,8 +104,8 @@ else:
                 else:
                     gaming = False
 
-                print ("Incorrect that's not a country! You lose! Game over!")   
-                exit()
+             print ("Incorrect that's not a country! You lose! Game over!")   
+             exit()
         else: #corresponds with how to play == yes?
             os.system("say 'I'm sorry I cannot understand you. Can you please restart and type in yes or no next time?' ")
             print ("I'm sorry I cannot understand you. Can you please restart and type in yes or no next time?")
