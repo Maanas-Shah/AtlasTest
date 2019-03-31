@@ -33,86 +33,111 @@ def recognize_speech():
     return recognized_text
 
 #Introduction Code
-os.system("say 'Would you like to play a little game?' ")
-print('Would you like to play a little game?')
-if use_audio_input: 
-    wanttoplay = recognize_speech()
-else:
-    wanttoplay = input("""Would you like to play a little game?\n""")
-if not wanttoplay:
-    wanttoplay = input("""Would you like to play a little game?\n""")
-if (wanttoplay == "no"):
-    os.system("say 'So sad to see you go. Come back another time!' ")
-    print ("So sad to see you go. Come back another time!")
-    exit()
-else:
-    if (wanttoplay == "yes"):
-        os.system("say 'Great!' ")
-        print ("Great!")
-        os.system("say 'Do you know how to play Atlas?' ")
-        if use_audio_input:
-            howtoplay = recognize_speech()
-        else:
-            howtoplay = input("""Do you know how to play Atlas?\n""")
-        if not howtoplay:
-            howtoplay = input("""Do you know how to play Atlas?\n""")
-        #Gameplay Code if they don't know how to play
-        if (howtoplay == "no"):
-            os.system("""say "This is how you play: First, we start with any country. Let's say America. Since America ends with the letter A, you have to say a country starting with A. Then I will say a country starting with the last letter of the place you said. I know, it is a little confusing. Let's try it! I'll start!" """)
-            print("This is how you play: First, we start with any country. Let's say America. Since America ends with the letter A, you have to say a country starting with A. Then I will say a country starting with the last letter of the place you said. I know, it is a little confusing. Let's try it! I'll start!") 
-            print("")
-            from random import choice
-            countries = open("countrieslist.txt", "r")
-            countries_list = countries.read().split("\n")
-            final_choice = choice(countries_list)
-            country_imput = input(final_choice)
-            print (final_choice) 
-            howtoplay="yes"
-        #Gameplay Code if they do know how to play
-        if (howtoplay == "yes"):
-            os.system("""say "Excellent!" """)
-            print("Excellent!") 
-            gaming = True
-            from random import choice
-            countries = open("countrieslist.txt", "r")
-            countries_list = [country.lower() for country in countries.read().split("\n")]
-
-
-            final_choice = choice(countries_list)
-            player_previous = []
-            while (gaming):
-                player_input = input(final_choice + "\n")
-                if player_input in player_previous:
-                    os.system("say 'Hey! You can't use the same country!' ")
-                    print ("Hey! You can't use the same country!")
-                    continue
-                player_previous.append(player_input)
-                if (player_input[0].lower() == final_choice[-1]):
-                    if player_input.lower() in countries_list:
-                         os.system("say 'Good job!' ")
-                         print ("Good job!")
-                         user_final_letter = player_input[-1]
-                         vaild_computer = []
-                         for country in countries_list:
-
-                            if country[0]== user_final_letter:
-                                vaild_computer.append(country)
-                         final_choice = choice(vaild_computer)
-                         player_previous.append(final_choice)
-                     else:
-                        gaming = False
+imputcorrector = True
+while (imputcorrector):
+    os.system("say 'Would you like to play a little game?' ")
+    print('Would you like to play a little game?')
+    if use_audio_input: 
+        wanttoplay = recognize_speech()
+    else:
+        wanttoplay = input("""Would you like to play a little game?\n""")
+    if not wanttoplay:
+        wanttoplay = input("""Would you like to play a little game?\n""")
+    if (wanttoplay == "yes" or wanttoplay == "no"):
+        imputcorrector = False
+    else:
+        os.system("""say "I'm sorry I cannot understand you. Can you please type in yes or no?" """)
+        print ("I'm sorry I cannot understand you. Can you please type in yes or no?\n")
+    if (wanttoplay == "no"):
+        os.system("say 'So sad to see you go. Come back another time!' ")
+        print ("So sad to see you go. Come back another time!")
+        exit()
+    else:
+        if (wanttoplay == "yes"):
+            os.system("say 'Great!' ")
+            print ("Great!")
+            imputcorrector2 = True
+            while (imputcorrector2):
+                os.system("say 'Do you know how to play Atlas?' ")
+                print ("Do you know how to play Atlas?")
+                if use_audio_input:
+                    howtoplay = recognize_speech()
                 else:
-                    gaming = False
-
-             print ("Incorrect that's not a country! You lose! Game over!")   
-             exit()
-        else: #corresponds with how to play == yes?
-            os.system("say 'I'm sorry I cannot understand you. Can you please restart and type in yes or no next time?' ")
-            print ("I'm sorry I cannot understand you. Can you please restart and type in yes or no next time?")
-            quit()
-
-    else: #corresponds with "want to play yes"?
-        print ("I'm sorry I cannot understand you. Can you please restart and type in yes or no next time?")
-        
-      
- 
+                    howtoplay = input("""Do you know how to play Atlas?\n""")
+                if not howtoplay:
+                    howtoplay = input("""Do you know how to play Atlas?\n""")
+                if (howtoplay == "yes" or howtoplay == "no"):
+                    imputcorrector2 = False
+                else:
+                    os.system("say 'I'm sorry I cannot understand you. Can you please type in yes or no?' ")
+                    print("I'm sorry I cannot understand you. Can you please type in yes or no?\n")
+                if (howtoplay == "no"):
+                    print ("Well this is how you play: \nFirst, we start with any country. Let's say America. Since America ends with the letter A, you have to say a country starting with the letter A. Then I will say a country starting with the last letter of the place you said. I know, it is a little confusing. Let's try it! Make sure you spell them correctly and remember, NO REPEATS! Let's begin!")
+                    os.system("""say "This is how you play: First, we start with any country. Let's say America. Since America ends with the letter A, you have to say a country starting with A. Then I will say a country starting with the last letter of the place you said. I know, it is a little confusing. Let's try it! Make sure you spell them correctly and remember, NO REPEATS! Let's begin! " """)
+                    print ("")
+                    gaming = True
+                    from random import choice
+                    countries = open("countrieslist.txt","r")
+                    countries_list = [country.lower() for country in countries.read().split("\n")]
+                    final_choice = choice(countries_list)
+                    player_previous = []
+                    while (gaming):
+                        player_input = input(final_choice + "\n")
+                        if player_input in player_previous:
+                            os.system("say 'Hey! You used the same country twice! You lose! Game over!!' ")
+                            print ("Hey! You used the same country twice! You lose! Game over!")
+                            exit()
+                        player_previous.append(player_input)
+                        if (player_input[0].lower() == final_choice[-1]):
+                            if player_input.lower() in countries_list:
+                                os.system("say 'Good Job!' ")
+                                print ("Good job!")
+                                user_final_letter = player_input[-1]
+                                vaild_computer = []
+                                for country in countries_list:
+                                    if country[0] == user_final_letter:
+                                        vaild_computer.append(country)
+                                final_choice = choice(vaild_computer)
+                                player_previous.append(final_choice)
+                            else:
+                                gaming = False
+                        else:
+                            gaming = False
+                    os.system("""say "Incorrect that's not a country! You lose! Game over!" """)
+                    print ("Incorrect that's not a country! You lose! Game over!")
+                    exit()
+                if (howtoplay == "yes"):
+                    print ("Excellent! Today we will be playing the game using only countries. Make sure you spell them correctly! Let's begin!")
+                    os.system("""say "Excellent! Today we will be playing the game using only countries. Make sure you spell them correctly! Let's begin!" """)
+                    print ("")
+                    gaming = True
+                    from random import choice
+                    countries = open("countrieslist.txt","r")
+                    countries_list = [country.lower() for country in countries.read().split("\n")]
+                    final_choice = choice(countries_list)
+                    player_previous = []
+                    while (gaming):
+                        player_input = input(final_choice + "\n")
+                        if player_input in player_previous:
+                            os.system("say 'Hey! You used the same country twice! You lose! Game over!!' ")
+                            print ("Hey! You used the same country twice! You lose! Game over!")
+                            exit()
+                        player_previous.append(player_input)
+                        if (player_input[0].lower() == final_choice[-1]):
+                            if player_input.lower() in countries_list:
+                                os.system("say 'Good Job!' ")
+                                print ("Good job!")
+                                user_final_letter = player_input[-1]
+                                vaild_computer = []
+                                for country in countries_list:
+                                    if country[0] == user_final_letter:
+                                        vaild_computer.append(country)
+                                final_choice = choice(vaild_computer)
+                                player_previous.append(final_choice)
+                            else:
+                                gaming = False
+                        else:
+                            gaming = False
+                    os.system("say 'Incorrect that's not a country! You lose! Game over!' ")
+                    print ("Incorrect that's not a country! You lose! Game over!")
+                    exit()
