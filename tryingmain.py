@@ -67,6 +67,7 @@ else:
             final_choice = choice(countries_list)
             country_imput = input(final_choice)
             print (final_choice) 
+            howtoplay="yes"
         #Gameplay Code if they do know how to play
         if (howtoplay == "yes"):
             gaming = True
