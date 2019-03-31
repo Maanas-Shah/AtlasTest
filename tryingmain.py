@@ -35,14 +35,14 @@ def recognize_speech():
 #Introduction Code
 imputcorrector = True
 while (imputcorrector):
-    os.system("say 'Would you like to play a little game?' ")
-    print('Would you like to play a little game?')
+    os.system("say 'Would you like to play a game?' ")
+    print('Would you like to play a game?')
     if use_audio_input: 
         wanttoplay = recognize_speech()
     else:
-        wanttoplay = input("""Would you like to play a little game?\n""")
+        wanttoplay = input("""Would you like to play a game?\n""")
     if not wanttoplay:
-        wanttoplay = input("""Would you like to play a little game?\n""")
+        wanttoplay = input("""Would you like to play a game?\n""")
     if (wanttoplay == "yes" or wanttoplay == "no"):
         imputcorrector = False
     else:
@@ -108,7 +108,7 @@ while (imputcorrector):
                     exit()
                 if (howtoplay == "yes"):
                     print ("Excellent! Today we will be playing the game using only countries. Make sure you spell them correctly! Let's begin!")
-                    os.system("""say "Excellent! Today we will be playing the game using only countries. Make sure you spell them correctly! Let's begin!" """)
+                    os.system("""say "Excellent! Today we will be playing the game using only countries. Make sure you spell them correctly and remember, NO REPEATS. Let's begin!" """)
                     print ("")
                     gaming = True
                     from random import choice
@@ -138,6 +138,6 @@ while (imputcorrector):
                                 gaming = False
                         else:
                             gaming = False
-                    os.system("say 'Incorrect that's not a country! You lose! Game over!' ")
                     print ("Incorrect that's not a country! You lose! Game over!")
+                    os.system("say 'Incorrect that's not a country! You lose! Game over!' ")
                     exit()
