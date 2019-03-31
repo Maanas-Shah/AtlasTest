@@ -139,5 +139,5 @@ while (imputcorrector):
                         else:
                             gaming = False
                     print ("Incorrect that's not a country! You lose! Game over!")
-                    os.system("say 'Incorrect that's not a country! You lose! Game over!' ")
+                    os.system("""say "Incorrect that's not a country! You lose! Game over!" """)
                     exit()
