@@ -70,6 +70,8 @@ else:
             howtoplay="yes"
         #Gameplay Code if they do know how to play
         if (howtoplay == "yes"):
+            os.system("""say "Excellent!" """)
+            print("Excellent!") 
             gaming = True
             from random import choice
             countries = open("countrieslist.txt", "r")
@@ -97,11 +99,12 @@ else:
                                 vaild_computer.append(country)
                          final_choice = choice(vaild_computer)
                          player_previous.append(final_choice)
+                     else:
+                        gaming = False
                 else:
                     gaming = False
-            else:
-                gaming = False
-                print ("Incorrect! You lose! Game over!")   
+
+                print ("Incorrect that's not a country! You lose! Game over!")   
                 exit()
         else: #corresponds with how to play == yes?
             os.system("say 'I'm sorry I cannot understand you. Can you please restart and type in yes or no next time?' ")
